@@ -47,7 +47,7 @@ The content focuses on automating design constraints, integrating with open-sour
 - TCL Development Suite
 - [Yosys](https://yosyshq.net/yosys/) – Open-source RTL synthesis
 - [OpenTimer](https://github.com/OpenTimer/OpenTimer) – Static timing analysis
-- VSD custom libraries (if provided)
+- VSD custom libraries 
 
 ---
 
