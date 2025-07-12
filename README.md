@@ -1,4 +1,4 @@
-# TCL & Linux Scripting for Semiconductor Design
+# TCL Workshop 
 
 ## Overview  
 This repository contains course materials, lab scripts, and hands-on exercises from the **VSD TCL & Linux Workshop**. The goal is to build strong proficiency in **TCL scripting** and **Linux-based automation** for semiconductor digital design flows.
