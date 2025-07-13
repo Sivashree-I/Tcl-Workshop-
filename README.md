@@ -141,6 +141,33 @@ if {![file exists $ConstraintsFile]} {
         puts "\nInfo: Contraints file found in path $ConstraintsFile"
 }
 ```
+<img width="1030" height="341" alt="image" src="https://github.com/user-attachments/assets/a47bc594-0a7f-47e7-b271-37a797a74ffb" />
+<img width="1022" height="375" alt="image" src="https://github.com/user-attachments/assets/ae7d14cc-80d5-478e-846b-9e0d091a690f" />
+Constraint File Processing (openMSP430_design_constraints.csv):
+The openMSP430_design_constraints.csv file was successfully read and converted into a matrix structure. The script extracted the total number of rows and columns, along with identifying the starting indices for clock, input, and output constraints. Below is the core TCL code used for processing, along with a terminal screenshot displaying variable values printed using puts for verification.
+```bash
+puts "\nInfo: Dumping SDC contraints file for $DesignName"
+::struct::matrix constraints
+set  chan [open $ConstraintsFile]
+csv::read2matrix $chan constraints  , auto
+close $chan
+set number_of_rows [constraints rows]
+puts "number_of_rows are $number_of_rows"
+set number_of_columns [constraints columns]
+puts "number_of_columns are $number_of_columns"
+set clock_start [lindex [lindex [constraints search all CLOCKS] 0 ] 1]
+puts "clock_start = $clock_start"
+set clock_start_column [lindex [lindex [constraints search all CLOCKS] 0 ] 0]
+puts "clock_start_column = $clock_start_column"
+#----check row number for "inputs" section in constraints.csv------------#
+set input_ports_start [lindex [lindex [constraints search all INPUTS] 0 ] 1]
+puts "input_ports_start = $input_ports_start"
+#----check row number for "inputs" section in constraints.csv------------#
+set output_ports_start [lindex [lindex [constraints search all OUTPUTS] 0 ] 1]
+puts "output_ports_start = $output_ports_start"
+```
+<img width="1035" height="470" alt="image" src="https://github.com/user-attachments/assets/fac15699-cc0d-4955-8cb1-183512a72bee" />
+
 ### Module 3: Clock & Input Constraint Scripting
 - Writing clock constraints (period, duty cycle)
 - Classifying input ports using regular expressions
