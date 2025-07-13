@@ -25,6 +25,7 @@ The content focuses on automating design constraints, integrating with open-sour
 <img width="1040" height="516" alt="image" src="https://github.com/user-attachments/assets/2977a467-2dfc-4298-adb2-91838f4a2357" />
 - VSDSYNTH toolbox usage and user input handling
 Task is to create vsdsynth and vsdsynth.tcl files. The basic structure of bash code used for the implementation of general conditions such as not giving the csv file or giving an non exsitient csv fileor giving the correct file
+<img width="923" height="697" alt="image" src="https://github.com/user-attachments/assets/e9a2c229-2592-4fe9-87fe-d5170f752dec" />
 
 ```bash
 if ($#argv != 1) then
@@ -58,10 +59,88 @@ if (! -f $argv[1] || $argv[1] == "-help") then
 else tclsh ./vsdsynth.tcl $argv[1]
 endif
 ```
+Working of the above script in the user interface 
+<img width="1036" height="507" alt="image" src="https://github.com/user-attachments/assets/cdb88f67-6859-4164-aa93-acf490ef0058" />
+In the above picture, we can see scenarios such as providing no input file to the command, providing an incorrect number of inputs, using a wrong .csv file, and seeking help to understand the command's capabilities and requirements.
 ### Module 2: Variable Creation & Constraint Processing
+Module 2 involves writing the TCL script in vsdsynth.tcl to handle variable creation, check for file and directory existence, and process the constraints CSV file. The script should convert the constraints into both Format 1 (required by the Yosys tool) and the standard SDC (Synopsys Design Constraints) format used in the industry.
+<img width="950" height="520" alt="image" src="https://github.com/user-attachments/assets/b03effdb-2b03-4922-8faf-ddf3651e4a2f" />
 - Working with arrays, matrices, and loop constructs
 - Parsing and validating CSV/SDC constraint files
+Inside the openMSP430_design_constraints.csv file
+<img width="1037" height="503" alt="image" src="https://github.com/user-attachments/assets/62995540-72d8-4630-b2a9-7da8b7164e77" />
+vsdsynth.tcl (using matric package and creating a mtric from the details.csv file)
+```bash
+set filename [lindex $argv 0]
+package require csv
+package require struct::matrix
+struct::matrix m
+set f [open $filename]
+csv::read2matrix $f m , auto
+close $f
+set columns [m columns]
+#m add columns $columns
+m link my_arr
+set num_of_rows [m rows]
+```
+Variables were automatically created by converting the .csv file into a matrix, determining the number of rows and columns, and dynamically generating variables for each entry using the matrix structure (my_arr).
+```bash
+set i 0
+	while {$i < $num_of_rows} {
+		puts "\nInfo: Setting $my_arr(0,$i) as '$my_arr(1,$i)'"
+		if {$i == 0} {
+			set [string map {" " ""} $my_arr(0,$i)] $my_arr(1,$i)
+		} else {
+			set [string map {" " ""} $my_arr(0,$i)] [file normalize $my_arr(1,$i)]
+		}
+		set i [expr {$i+1}]
+	}
+}
 
+puts "\nInfo: Below are the list of initial variables and their values. User can use these variables for further debug. Use 'puts <variable name>' command to query value of below variables"
+puts "DesignName = $DesignName"
+puts "OutputDirectory = $OutputDirectory"
+puts "NetlistDirectory = $NetlistDirectory"
+puts "EarlyLibraryPath = $EarlyLibraryPath"
+puts "LateLibraryPath = $LateLibraryPath"
+puts "ConstraintsFile = $ConstraintsFile"
+```
+The names were converted into variable identifiers by removing spaces, and the corresponding paths were assigned to these variables.
+<img width="1037" height="352" alt="image" src="https://github.com/user-attachments/assets/237a231d-fba2-4ff0-806f-13c5a8835fe6" />
+Directory Existence Checking:
+The script includes logic to verify the existence of all required files and directories. If any critical file or directory is missing, the program terminates with an appropriate error message to prevent further execution. The only exception is the output directory, which is automatically created if it does not already exist. Below are the corresponding code snippets and terminal screenshots demonstrating this functionality—one showing the creation of a new output directory, and another showing a case where the output directory exists but the constraints file is missing.
+```bash
+if {![file isdirectory $OutputDirectory]} {
+	puts "\nInfo: Cannot find output directory $OutputDirectory. Creating $OutputDirectory"
+	file mkdir $OutputDirectory
+} else {
+	puts "\nInfo: Output directory found in path $OutputDirectory"
+}
+if {![file isdirectory $NetlistDirectory]} {
+        puts "\nInfo: Cannot find RTL netlist directory $NetlistDirectory. Exiting..."
+        exit
+} else {
+        puts "\nInfo: RTL Netlist directory found in path $NetlistDirectory"
+}
+if {![file exists $EarlyLibraryPath]} {
+        puts "\nInfo: Cannot find early cell library in path $EarlyLibraryPath. Exiting..."
+        exit
+} else {
+        puts "\nInfo: Early cell library found in path $EarlyLibraryPath"
+}
+if {![file exists $LateLibraryPath]} {
+        puts "\nInfo: Cannot find late cell library in path $LateLibraryPath. Exiting..."
+        exit
+} else {
+        puts "\nInfo: Late cell library found in path $LateLibraryPath"
+}
+if {![file exists $ConstraintsFile]} {
+        puts "\nInfo: Cannot find constraints file in path $ConstraintsFile. Exiting..."
+        exit
+} else {
+        puts "\nInfo: Contraints file found in path $ConstraintsFile"
+}
+```
 ### Module 3: Clock & Input Constraint Scripting
 - Writing clock constraints (period, duty cycle)
 - Classifying input ports using regular expressions
