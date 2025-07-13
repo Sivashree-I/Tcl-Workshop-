@@ -28,22 +28,36 @@ Task is to create vsdsynth and vsdsynth.tcl files. The basic structure of bash c
 
 ```bash
 if ($#argv != 1) then
-    echo "Info: Please provide the csv file"
-    exit 1
+	echo "Info: Please provide the csv file"
+	exit 1
 endif
 
 if (! -f $argv[1] || $argv[1] == "-help") then
-    if ($argv[1] != "-help") then
-        echo "Error: Cannot find csv file $argv[1]. Exiting..."
-        exit 1
-    else
-        echo USAGE: ./vsdsynth \<csv file\>
-        echo
-        echo "    where \<csv file\> consists of 2 columns, below keyword being in 1st column"
-        echo
-        echo "    \<Design Name\> is the name of the top-level module"
-    endif
+	if ($argv[1] != "-help") then
+		echo "Error: Cannot find csv file $argv[1]. Exiting..."
+		exit 1
+	else
+		echo USAGE: ./vsdsynth \<csv file\>
+		echo
+		echo        where \csv file\> consists of 2 columns, below keyword being in 1st column and is Case Sensitive. PLease request PS for sample csv file
+		echo
+		echo        \<Design Name\> is the name of the top level module
+                echo
+                echo        \<Output Directory\> is the name of the output directory where you want to dump synthesis script, synthesized netlist and timing reports
+                echo
+                echo        \<Netlist Directory\> is the name of  directory where all the RTL netlist are present
+                echo
+                echo        \<Early Library Path\> is the file path of the early cell library to be used for STA
+                echo
+                echo        \<Late Library Path\> is the file path of the late cell library to be used for STA
+                echo
+                echo        \<Constraints file\> is csv file path of contraints to be used for STA
+		echo
+		exit 1
+	endif
+else tclsh ./vsdsynth.tcl $argv[1]
 endif
+'''
 ### Module 2: Variable Creation & Constraint Processing
 - Working with arrays, matrices, and loop constructs
 - Parsing and validating CSV/SDC constraint files
