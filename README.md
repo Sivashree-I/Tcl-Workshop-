@@ -22,8 +22,17 @@ The content focuses on automating design constraints, integrating with open-sour
 
 ### Module 1: TCL Basics & VSDSYNTH Toolbox
 - Introduction to TCL scripting and task automation
+<img width="1040" height="516" alt="image" src="https://github.com/user-attachments/assets/2977a467-2dfc-4298-adb2-91838f4a2357" />
 - VSDSYNTH toolbox usage and user input handling
-
+Task is to create vsdsynth and vsdsynth.tcl files. The basic structure of bash code used for the implementation of general conditions such as not giving the csv file or giving an non exsitient csv fileor giving the correct file
+```tcl
+# Check if the input file exists or if '-help' is passed
+if {![file exists $argv[1]] || $argv[1] == "-help"} {
+    if {$argv[1] != "-help"} {
+        puts "Error: cannot find csv file $argv[1]. Exiting..."
+        exit 1
+    }
+} 
 ### Module 2: Variable Creation & Constraint Processing
 - Working with arrays, matrices, and loop constructs
 - Parsing and validating CSV/SDC constraint files
