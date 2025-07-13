@@ -57,7 +57,7 @@ if (! -f $argv[1] || $argv[1] == "-help") then
 	endif
 else tclsh ./vsdsynth.tcl $argv[1]
 endif
-'''
+```
 ### Module 2: Variable Creation & Constraint Processing
 - Working with arrays, matrices, and loop constructs
 - Parsing and validating CSV/SDC constraint files
