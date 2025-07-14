@@ -603,6 +603,7 @@ proc set_multi_cpu_usage {args} {
 ```
 
 <img width="497" height="466" alt="image" src="https://github.com/user-attachments/assets/3965ea1c-ccc2-4606-9747-28718ab37abc" />
+
 read_lib.proc
 This proc generates the commands needed to load both early and late timing libraries required by the OpenTimer tool.
 
