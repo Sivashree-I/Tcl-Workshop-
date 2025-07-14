@@ -493,6 +493,7 @@ Module 5 focused on executing the main synthesis flow using Yosys, gaining a wor
 - Runtime and delay extraction using TCL procedures
 - Conversion of constraints to OpenTimer format
 - Bit-blasting bussed signals
+- 
 ```bash
 # Main Synthesis Script
 puts "\nInfo: Creating main synthesis script to be used by Yosys"
@@ -532,10 +533,12 @@ if {[catch {exec yosys -s $OutputDirectory/$DesignName.ys >& $OutputDirectory/$D
 }
 puts "Please refer to log $OutputDirectory/$DesignName.synthesis.log"
 ```
+
 <img width="1037" height="190" alt="image" src="https://github.com/user-attachments/assets/081af310-03da-4055-9fb7-dd9bd84b3c11" />
 <img width="1035" height="491" alt="image" src="https://github.com/user-attachments/assets/6ecd4445-6050-4027-b8ee-bb8949817e44" />
 Editing .synth.v for OpenTimer Compatibility
 I have successfully developed a script to modify the main synthesis output netlist (.synth.v) to ensure compatibility with OpenTimer and other STA/PnR tools. This involved replacing instances of "*" with the word form and removing quotation marks (") from all relevant lines. The core script, along with terminal screenshots displaying variable states and debug information via puts statements, is shown below.
+
 ```bash
 #Editing synth.v to be usable by Opentimer
 set fileId [open /tmp/1 "w"]
@@ -625,6 +628,7 @@ proc read_lib args {
 ```
 read_verilog.proc
 This proc generates the commands to load the synthesized netlist, which is essential for the OpenTimer tool.
+
 ```bash
 #!/bin/tclsh
 
