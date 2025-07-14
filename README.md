@@ -844,6 +844,7 @@ set time_elapsed_in_sec "$time_elapsed_in_sec PS"
 <img width="1032" height="501" alt="image" src="https://github.com/user-attachments/assets/dc059b36-fcb2-4bb7-b6f4-2f0d1d8d2920" />
 QoR Generation
 The code for generating the Quality of Results (QoR) report has been successfully implemented. The core script, along with terminal screenshots, is provided below.
+
 ```bash
 set formatStr {%15s%15s%15s%15s%15s%15s%15s%15s%15s}
 
@@ -857,7 +858,6 @@ foreach design_name $DesignName runtime $time_elapsed_in_sec instance_count $Ins
 puts [format $formatStr "-----------" "-------" "--------------" "-----------" "-----------" "----------" "----------" "-------" "-------"]
 puts "\n"
 ```
-
 <img width="1030" height="461" alt="image" src="https://github.com/user-attachments/assets/318183a7-2964-4473-85a7-03e3835664d0" />
 <img width="1036" height="461" alt="image" src="https://github.com/user-attachments/assets/17865828-6376-47de-9b98-bb42ae78cc7a" />
 <img width="1037" height="346" alt="image" src="https://github.com/user-attachments/assets/20b3a0fb-c9a3-4a0c-b7eb-5ec8f07acabe" />
