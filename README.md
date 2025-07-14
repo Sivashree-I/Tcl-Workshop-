@@ -69,7 +69,7 @@ Module 2 involves writing the TCL script in vsdsynth.tcl to handle variable crea
 - Parsing and validating CSV/SDC constraint files
 Inside the openMSP430_design_constraints.csv file
 <img width="1037" height="503" alt="image" src="https://github.com/user-attachments/assets/62995540-72d8-4630-b2a9-7da8b7164e77" />
-vsdsynth.tcl (using matric package and creating a mtric from the details.csv file)
+vsdsynth.tcl (using matric package and creating a matrix from the details.csv file)
 ```bash
 set filename [lindex $argv 0]
 package require csv
