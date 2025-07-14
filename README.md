@@ -458,8 +458,10 @@ close $fileId
 ```
 <img width="1035" height="493" alt="image" src="https://github.com/user-attachments/assets/cd1382b1-d0ac-4b45-b31a-53bbb0d9e375" />
 <img width="1041" height="321" alt="image" src="https://github.com/user-attachments/assets/28cd9c21-cd99-4e44-a107-066cd25edd17" />
+
 Hierarchy Check and Error Handling
 I have successfully implemented error handling for the hierarchy check process in Yosys. The script is designed to detect and respond to any errors that occur during the hierarchy check, terminating execution if a failure is encountered. The core code, along with terminal screenshots showing puts statements for variable values and debugging, is provided below.
+
 ```bash
 set my_err [catch {exec yosys -s $OutputDirectory/$DesignName.hier.ys >& $OutputDirectory/$DesignName.hierarchy_check.log} msg]
 puts "error flag is $my_err"
