@@ -567,15 +567,19 @@ Exploring the Use of Procs
 Procs (procedures) can be used to define custom commands for enhancing script flexibility and reusability. I have successfully implemented multiple user-defined procs, including set_multi_cpu_usage and read_sdc, among others. The corresponding code for each proc, along with terminal screenshots displaying variable outputs and debug messages via puts statements, is provided below.
 reopenStdout.proc
 This proc is designed to redirect the standard output (stdout) to a file specified as an argument. The implementation is written in Tcl as shown in the snippet below.
-Code: #!/bin/tclsh
+Code:
+
 ```bash
+#!/bin/tclsh
 proc reopenStdout {file} {
     close stdout
     open $file w       
 }
 ```
+
 set_multi_cpu_usage.proc
 This proc configures and outputs the command to enable multi-threaded CPU usage, as required by the OpenTimer tool.
+
 ```bash
 #!/bin/tclsh
 
@@ -597,9 +601,11 @@ proc set_multi_cpu_usage {args} {
         }
 }
 ```
+
 <img width="497" height="466" alt="image" src="https://github.com/user-attachments/assets/3965ea1c-ccc2-4606-9747-28718ab37abc" />
 read_lib.proc
 This proc generates the commands needed to load both early and late timing libraries required by the OpenTimer tool.
+
 ```bash
 #!/bin/tclsh
 
