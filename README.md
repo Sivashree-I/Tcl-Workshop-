@@ -904,8 +904,4 @@ puts "\n"
 
 ---
 
-## Instructor
-**Kunal Ghosh** – Founder, VLSI System Design Corp (VSD)
-
----
 
