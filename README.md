@@ -639,11 +639,13 @@ proc read_verilog {arg1} {
 	puts "set_verilog_fpath $arg1"
 }
 ```
+
 read_sdc.proc
 This proc generates the necessary commands to load the .timing constraints file required by the OpenTimer tool. It performs a conversion of SDC file contents into a .timing file format compatible with OpenTimer. The conversion process is explained step-by-step with accompanying screenshots for clarity.
 
 Converting create_clock Constraints
 The proc begins by accepting the SDC file as an input parameter and processes the create_clock constraints section, translating it into the appropriate .timing format.
+
 ```bash
 #!/bin/tclsh
 
@@ -678,7 +680,9 @@ foreach elem $find_clocks {
 }
 close $tmp_file
 ```
+
 Code and Results for STA
+
 ```bash
 puts "\nInfo: Timing Analysis Started....."
 puts "\nInfo: Initializing number of threads, libraries, sdc, verilog netlist path...."
