@@ -84,6 +84,7 @@ m link my_arr
 set num_of_rows [m rows]
 ```
 Variables were automatically created by converting the .csv file into a matrix, determining the number of rows and columns, and dynamically generating variables for each entry using the matrix structure (my_arr).
+
 ```bash
 set i 0
 	while {$i < $num_of_rows} {
@@ -105,10 +106,12 @@ puts "EarlyLibraryPath = $EarlyLibraryPath"
 puts "LateLibraryPath = $LateLibraryPath"
 puts "ConstraintsFile = $ConstraintsFile"
 ```
+
 The names were converted into variable identifiers by removing spaces, and the corresponding paths were assigned to these variables.
 <img width="1037" height="352" alt="image" src="https://github.com/user-attachments/assets/237a231d-fba2-4ff0-806f-13c5a8835fe6" />
 Directory Existence Checking:
 The script includes logic to verify the existence of all required files and directories. If any critical file or directory is missing, the program terminates with an appropriate error message to prevent further execution. The only exception is the output directory, which is automatically created if it does not already exist. Below are the corresponding code snippets and terminal screenshots demonstrating this functionality—one showing the creation of a new output directory, and another showing a case where the output directory exists but the constraints file is missing.
+
 ```bash
 if {![file isdirectory $OutputDirectory]} {
 	puts "\nInfo: Cannot find output directory $OutputDirectory. Creating $OutputDirectory"
@@ -141,10 +144,12 @@ if {![file exists $ConstraintsFile]} {
         puts "\nInfo: Contraints file found in path $ConstraintsFile"
 }
 ```
+
 <img width="1030" height="341" alt="image" src="https://github.com/user-attachments/assets/a47bc594-0a7f-47e7-b271-37a797a74ffb" />
 <img width="1022" height="375" alt="image" src="https://github.com/user-attachments/assets/ae7d14cc-80d5-478e-846b-9e0d091a690f" />
 Constraint File Processing (openMSP430_design_constraints.csv):
 The openMSP430_design_constraints.csv file was successfully read and converted into a matrix structure. The script extracted the total number of rows and columns, along with identifying the starting indices for clock, input, and output constraints. Below is the core TCL code used for processing, along with a terminal screenshot displaying variable values printed using puts for verification.
+
 ```bash
 puts "\nInfo: Dumping SDC contraints file for $DesignName"
 ::struct::matrix constraints
