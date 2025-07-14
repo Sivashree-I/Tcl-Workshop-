@@ -495,7 +495,7 @@ Module 5 focused on executing the main synthesis flow using Yosys, gaining a wor
 - Runtime and delay extraction using TCL procedures
 - Conversion of constraints to OpenTimer format
 - Bit-blasting bussed signals
-- 
+-  
 ```bash
 # Main Synthesis Script
 puts "\nInfo: Creating main synthesis script to be used by Yosys"
